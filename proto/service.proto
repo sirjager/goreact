@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package goreact;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+import "rpc-welcome.proto"; 
+import "rpc-health.proto"; 
+ 
+option go_package = "github.com/sirjager/goreact/rpc";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: { 
+        title: "GoReact Api";
+        version: "0.1.0";
+        contact: {
+            name:   "SirJager";
+            url: "https://github.com/sirjager/goreact";
+        };
+    };
+};
+
+service GoReact {
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+        description: "GoReact is a standalone image optimzation gRPC and rest api"
+        external_docs: {
+            url: "https://github.com/sirjager/goreact";
+            description: "Find out more about GoReact";
+        }
+    };
+
+    rpc Welcome(WelcomeRequest) returns (WelcomeResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/welcome"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Returns welcome message";
+            summary: "Welcome Message";
+            tags: "System";
+        };
+    }
+
+    rpc Health(HealthRequest) returns (HealthResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/health"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Returns api health";
+            summary: "Api Health";
+            tags: "System";
+        };
+    }
+
+    
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package goreact;
+
+option go_package = "github.com/sirjager/goreact/rpc";
+
+
+message WelcomeRequest {}
+message WelcomeResponse { string message = 1 ; }
